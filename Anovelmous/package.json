@@ -1,0 +1,15 @@
+{
+  "name": "Anovelmous",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start"
+  },
+  "dependencies": {
+    "react-native": "^0.13.2"
+  },
+  "devDependencies": {
+    "eslint": "^1.7.3",
+    "eslint-config-airbnb": "^0.1.0"
+  }
+}
