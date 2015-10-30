@@ -4,15 +4,14 @@
  */
 'use strict';
 
-var React = require('react-native');
-var {
+import React, {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-} = React;
+} from 'react-native';
 
-var Anovelmous = React.createClass({
+const Anovelmous = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
@@ -31,7 +30,7 @@ var Anovelmous = React.createClass({
   }
 });
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
