@@ -1,16 +1,16 @@
 'use strict';
 
 import React, {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 
-const Anovelmous = React.createClass({
+export default StatsScreen = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
+        <Text>Stats</Text>
       </View>
     );
   }
@@ -24,5 +24,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
 });
-
-AppRegistry.registerComponent('Anovelmous', () => Anovelmous);
