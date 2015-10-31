@@ -17,6 +17,7 @@ import cssVar from 'cssVar';
 import ContributeScreen from './screens/ContributeScreen';
 import ArchivesScreen from './screens/ArchivesScreen';
 import StatsScreen from './screens/StatsScreen';
+import { renderScene } from './utils';
 
 const NavigationBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
@@ -149,7 +150,7 @@ const Anovelmous = React.createClass({
         ref={(navigator) => { this.navigator = navigator; }}
         renderScene={renderScene}
         initialRoute={{
-          title: 'ReelTalk',
+          title: 'Anovelmous',
           component: Main,
           props: {
             activeTab: 'contribute'
@@ -160,24 +161,7 @@ const Anovelmous = React.createClass({
 	}
 });
 
-const renderScene = (route, navigator) => {
-  const Component = route.component;
-  return (
-    <View style={styles.container}>
-      <Component
-        route={route}
-        navigator={navigator}
-        topNavigator={navigator}
-        {...route.props} />
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFD',
-  },
   scene: {
     paddingTop: 65,
     flex: 1,
