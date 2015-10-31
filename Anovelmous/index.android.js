@@ -4,6 +4,7 @@ import React, {
   AppRegistry,
   StyleSheet,
   Navigator,
+  PixelRatio,
   ListView,
   Text,
   ToolbarAndroid,
@@ -12,79 +13,63 @@ import React, {
   View,
 } from 'react-native';
 
+import cssVar from 'cssVar';
 import Drawer from 'react-native-drawer';
 
-import ContributeScreen from './screens/ContributeScreen';
-import ArchivesScreen from './screens/ArchivesScreen';
-import StatsScreen from './screens/StatsScreen';
-
-import { renderScene } from './utils';
-
-const Main = React.createClass({
-  getInitialState: function() {
-    const routes = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    return {
-      routes: routes.cloneWithRows([
-        { title: 'Contribute', component: ContributeScreen },
-        { title: 'Archives', component: ArchivesScreen },
-        { title: 'Stats', component: StatsScreen }
-      ]),
-    };
-  },
-  _onActionSelected: function(position) {
-  },
-  renderNavigationView: function(navigator) {
-    return (
-      <ListView style={{flex: 1, backgroundColor: '#fff'}}
-        dataSource={this.state.routes}
-        renderRow={(route) => (
-          <TouchableOpacity onPress={() => navigator.push(route)}>
-            <Text>{route.title}</Text>
-          </TouchableOpacity>
-        )} />
-    )
-  },
-  render: function() {
-    return (
-      <Drawer
-        type="overlay"
-        ref="navDrawer"
-        openDrawerOffset={50}
-        panCloseMask={1}
-        styles={styles.navDrawer}
-        tweenHandler={(ratio) => {
-          return {
-            drawer: { shadowRadius: Math.min(ratio*5*5, 5) },
-            main: { opacity: (2-ratio)/2 }
-          }
-        }}
-        content={this.renderNavigationView(this.props.navigator)}>
-        <ToolbarAndroid
-          style={{height: 60, backgroundColor: '#D32F2F'}}
-          navIcon={require('image!menu_icon')}
-          onIconClicked={() => this.refs.navDrawer.open()}
-          logo={require('image!toolbar_logo')}
-          title="Anovelmous"
-          titleColor="#FFFFFF"
-          actions={[]}
-          onActionSelected={this._onActionSelected}/>
-      </Drawer>
-    );
-  }
-});
+import LandingScreen from './screens/LandingScreen';
 
 const Anovelmous = React.createClass({
   getInitialState: function() {
     return { userId: '1' };
   },
+
+  componentWillMount: function() {
+    this._navBarRouteMapper = {
+      rightContentForRoute: function(route, navigator) {
+        return null;
+      },
+      titleContentForRoute: function(route, navigator) {
+        return (
+          <TouchableOpacity
+            onPress={() => {}}>
+            <Text style={styles.titleText}>{route.title}</Text>
+          </TouchableOpacity>
+        );
+      },
+      iconForRoute: function(route, navigator) {
+        return (
+          <TouchableOpacity
+            onPress={() => { navigator.popToRoute(route); }}
+            style={styles.crumbIconPlaceholder}
+          />
+        );
+      },
+      separatorForRoute: function(route, navigator) {
+        return (
+          <TouchableOpacity
+            onPress={navigator.pop}
+            style={styles.crumbSeparatorPlaceholder}
+          />
+        );
+      }
+    };
+  },
+
   render: function() {
     return (
       <Navigator
+        style={styles.container}
         ref={(navigator) => { this.navigator = navigator; }}
         renderScene={renderScene}
+        navigationBar={
+        <Navigator.BreadcrumbNavigationBar
+            style={styles.navBar}
+            routeMapper={this._navBarRouteMapper}
+          />
+        }
         initialRoute={{
           title: 'Anovelmous',
-          component: Main,
+          component: LandingScreen,
           props: {
             userId: this.state.userId
           }
@@ -94,18 +79,60 @@ const Anovelmous = React.createClass({
   }
 });
 
+export const renderScene = (route, navigator) => {
+  const Component = route.component;
+  return (
+    <View style={styles.scene}>
+      <Component
+        route={route}
+        navigator={navigator}
+        topNavigator={navigator}
+        {...route.props} />
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
+    overflow: 'hidden',
+    backgroundColor: '#FFFFFF',
+    flex: 1
+  },
+  scene: {
+    paddingTop: 50,
+    flex: 1
+  },
+  navBar: {
+    backgroundColor: '#D32F2F',
+    flex: 1
+  },
+  button: {
+    backgroundColor: '#FFFFFF',
+    padding: 15,
+    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomColor: '#CDCDCD',
+  },
+  buttonText: {
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  titleText: {
+    marginTop: 15,
+    marginLeft: 10,
+    fontSize: 18,
+    color: '#FFFFFF',
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    lineHeight: 32,
+  },
+  crumbIconPlaceholder: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#666666',
   },
-  navDrawer: {
-    shadowColor: '#000000',
-    shadowOpacity: 0.8,
-    shadowRadius: 0,
-  },
+  crumbSeparatorPlaceholder: {
+    flex: 1,
+    backgroundColor: '#aaaaaa',
+  }
 });
 
 AppRegistry.registerComponent('Anovelmous', () => Anovelmous);

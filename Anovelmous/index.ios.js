@@ -17,7 +17,6 @@ import cssVar from 'cssVar';
 import ContributeScreen from './screens/ContributeScreen';
 import ArchivesScreen from './screens/ArchivesScreen';
 import StatsScreen from './screens/StatsScreen';
-import { renderScene } from './utils';
 
 const NavigationBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
@@ -141,7 +140,20 @@ const Main = React.createClass({
   	  </TabBarIOS>
     );
   }
-})
+});
+
+export const renderScene = (route, navigator) => {
+  const Component = route.component;
+  return (
+    <View style={styles.container}>
+      <Component
+        route={route}
+        navigator={navigator}
+        topNavigator={navigator}
+        {...route.props} />
+    </View>
+  );
+};
 
 const Anovelmous = React.createClass({
 	render: function() {
@@ -165,6 +177,10 @@ const styles = StyleSheet.create({
   scene: {
     paddingTop: 65,
     flex: 1,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFD',
   },
   navBar: {
     backgroundColor: 'white',
