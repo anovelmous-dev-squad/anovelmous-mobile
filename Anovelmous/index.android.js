@@ -16,7 +16,9 @@ import React, {
 
 import Drawer from 'react-native-drawer';
 
+import ContributeScreen from './screens/ContributeScreen';
 import ArchivesScreen from './screens/ArchivesScreen';
+import StatsScreen from './screens/StatsScreen';
 
 var _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -27,42 +29,66 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   return true;
 });
 
+const AppText = React.createClass({
+  render: function() {
+    const { children } = this.props;
+    return <Text style={{ fontFamily: 'Roboto', color: '#FFFFFF'}}>{children}</Text>;
+  }
+});
+
+const PrimaryText = React.createClass({
+  render: function() {
+    const { children } = this.props;
+    return <Text style={{ fontFamily: 'Roboto', color: '#212121'}}>{children}</Text>;
+  }
+});
+
+const SecondaryText = React.createClass({
+  render: function() {
+    const { children } = this.props;
+    return <Text style={{ fontFamily: 'Roboto', color: '#727272'}}>{children}</Text>
+  }
+});
+
+const ControlPanel = React.createClass({
+  render: function() {
+    return (
+      <View>
+        <TouchableOpacity onPress={() => {
+            this.props.navigator.push({
+              title: 'Contribute',
+              component: ContributeScreen,
+              props: this.props
+            });
+          }}>
+          <AppText>Contribute</AppText>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+            this.props.navigator.push({
+              title: 'Archives',
+              component: ArchivesScreen,
+              props: this.props
+            });
+          }}>
+          <AppText>Archives</AppText>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+            this.props.navigator.push({
+              title: 'Stats',
+              component: StatsScreen,
+              props: this.props
+            });
+          }}>
+          <AppText>Statistics</AppText>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+});
 
 const Anovelmous = React.createClass({
   getInitialState: function() {
     return { userId: '1' };
-  },
-
-  componentWillMount: function() {
-    this._navBarRouteMapper = {
-      rightContentForRoute: function(route, navigator) {
-        return null;
-      },
-      titleContentForRoute: function(route, navigator) {
-        return (
-          <TouchableOpacity
-            onPress={() => {}}>
-            <Text style={styles.titleText}>{route.navTitle || route.title}</Text>
-          </TouchableOpacity>
-        );
-      },
-      iconForRoute: function(route, navigator) {
-        return (
-          <TouchableOpacity
-            onPress={() => { navigator.popToRoute(route); }}
-            style={styles.crumbIconPlaceholder}
-          />
-        );
-      },
-      separatorForRoute: function(route, navigator) {
-        return (
-          <TouchableOpacity
-            onPress={navigator.pop}
-            style={styles.crumbSeparatorPlaceholder}
-          />
-        );
-      }
-    };
   },
 
   render: function() {
@@ -71,15 +97,9 @@ const Anovelmous = React.createClass({
         style={styles.container}
         ref={(navigator) => { this.navigator = navigator; }}
         renderScene={renderScene}
-        navigationBar={
-        <Navigator.BreadcrumbNavigationBar
-            style={styles.navBar}
-            routeMapper={this._navBarRouteMapper}
-          />
-        }
         initialRoute={{
           title: 'Anovelmous',
-          component: ArchivesScreen,
+          component: ContributeScreen,
           props: {
             userId: this.state.userId
           }
@@ -89,17 +109,42 @@ const Anovelmous = React.createClass({
   }
 });
 
-export const renderScene = (route, navigator) => {
+const renderScene = (route, navigator) => {
   _navigator = navigator;
   const Component = route.component;
   return (
-    <View style={styles.scene}>
-      <Component
-        route={route}
-        navigator={navigator}
-        topNavigator={navigator}
-        {...route.props} />
-    </View>
+    <Drawer
+      type="overlay"
+      ref="drawer"
+      openDrawerOffset={100}
+      styles={{
+        drawer: {
+          backgroundColor: '#9E9E9E',
+          shadowColor: "#000000",
+          shadowOpacity: 0.8,
+          shadowRadius: 0,
+        }
+      }}
+      tweenHandler={(ratio) => {
+        const drawerShadow = ratio < .2 ? ratio*5*5 : 5
+        return {
+          drawer: {
+            shadowRadius: drawerShadow,
+          },
+          main: {
+            opacity:(2-ratio)/2,
+          },
+        }
+      }}
+      content={<ControlPanel navigator={navigator} />}>
+      <View style={styles.scene}>
+        <Component
+          route={route}
+          navigator={navigator}
+          topNavigator={navigator}
+          {...route.props} />
+      </View>
+    </Drawer>
   );
 };
 
@@ -110,40 +155,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   scene: {
-    paddingTop: 50,
     flex: 1
   },
-  navBar: {
-    backgroundColor: '#D32F2F',
-    flex: 1
-  },
-  button: {
-    backgroundColor: '#FFFFFF',
-    padding: 15,
-    borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: '#CDCDCD',
-  },
-  buttonText: {
-    fontSize: 17,
-    fontWeight: '500',
-  },
-  titleText: {
-    marginTop: 15,
-    marginLeft: 10,
-    fontSize: 18,
-    color: '#FFFFFF',
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    lineHeight: 32,
-  },
-  crumbIconPlaceholder: {
-    flex: 1,
-    backgroundColor: '#666666',
-  },
-  crumbSeparatorPlaceholder: {
-    flex: 1,
-    backgroundColor: '#aaaaaa',
-  }
 });
 
 AppRegistry.registerComponent('Anovelmous', () => Anovelmous);
