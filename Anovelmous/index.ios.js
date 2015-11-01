@@ -12,11 +12,11 @@ import React, {
   TouchableHighlight
 } from 'react-native';
 
-import cssVar from 'cssVar';
-
 import ContributeScreen from './screens/ContributeScreen';
 import ArchivesScreen from './screens/ArchivesScreen';
 import StatsScreen from './screens/StatsScreen';
+
+import { AppText } from './components/text';
 
 const NavigationBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
@@ -29,9 +29,9 @@ const NavigationBarRouteMapper = {
       <TouchableOpacity
         onPress={() => navigator.pop()}
         style={styles.navBarLeftButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText]}>
+        <AppText>
           {"< " + previousRoute.title}
-        </Text>
+        </AppText>
       </TouchableOpacity>
     );
   },
@@ -42,9 +42,9 @@ const NavigationBarRouteMapper = {
 
   Title: function(route, navigator, index, navState) {
     return (
-      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+      <AppText>
         {route.title}
-      </Text>
+      </AppText>
     );
   },
 
@@ -69,48 +69,6 @@ const Main = React.createClass({
     }
   },
 
-  renderContributeScreen: function() {
-    return (
-      <Navigator
-        sceneStyle={styles.scene}
-        ref="contributeRef"
-        initialRoute={{
-          title: 'Contribute',
-          component: ContributeScreen,
-          props: { userId: this.props.userId }
-        }}
-        renderScene={renderScene} />
-    );
-  },
-
-  renderArchivesScreen: function() {
-    return (
-      <Navigator
-        sceneStyle={styles.scene}
-        ref="archivesRef"
-        initialRoute={{
-          title: 'Archives',
-          component: ArchivesScreen,
-          props: { userId: this.props.userId }
-        }}
-        renderScene={renderScene} />
-    );
-  },
-
-  renderStatsScreen: function() {
-    return (
-      <Navigator
-        sceneStyle={styles.scene}
-        ref="statsRef"
-        initialRoute={{
-          title: 'Stats',
-          component: StatsScreen,
-          props: { userId: this.props.userId }
-        }}
-        renderScene={renderScene} />
-    );
-  },
-
   render: function() {
     return (
       <TabBarIOS>
@@ -119,7 +77,7 @@ const Main = React.createClass({
           ref="contributeTabRef"
   	      systemIcon="favorites"
   	      onPress={() => {this.onTabPress('contribute')}}>
-          {this.renderContributeScreen()}
+          <ContributeScreen {...this.props}/>
 
   	    </TabBarIOS.Item>
 
@@ -127,14 +85,14 @@ const Main = React.createClass({
   	      selected={this.state.selectedTab === 'archives'}
   	      systemIcon="bookmarks"
   	      onPress={() => {this.onTabPress('archives')}}>
-          {this.renderArchivesScreen()}
+          <ArchivesScreen {...this.props} />
   	    </TabBarIOS.Item>
 
   	    <TabBarIOS.Item
   	      selected={this.state.selectedTab === 'stats'}
   	      systemIcon="most-viewed"
   	      onPress={() => {this.onTabPress('stats')}}>
-          {this.renderStatsScreen()}
+          <StatsScreen {...this.props} />
   	    </TabBarIOS.Item>
 
   	  </TabBarIOS>
@@ -174,34 +132,9 @@ const Anovelmous = React.createClass({
 });
 
 const styles = StyleSheet.create({
-  scene: {
-    paddingTop: 65,
-    flex: 1,
-  },
   container: {
     flex: 1,
     backgroundColor: '#FFFFFD',
-  },
-  navBar: {
-    backgroundColor: 'white',
-  },
-  navBarText: {
-    fontSize: 16,
-    marginVertical: 10,
-  },
-  navBarTitleText: {
-    color: cssVar('fbui-bluegray-60'),
-    fontWeight: '500',
-    marginVertical: 9,
-  },
-  navBarLeftButton: {
-    paddingLeft: 10,
-  },
-  navBarRightButton: {
-    paddingRight: 10,
-  },
-  navBarButtonText: {
-    color: cssVar('fbui-accent-blue'),
   },
 });
 

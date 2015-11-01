@@ -38,6 +38,7 @@ export default ContributeScreen = React.createClass({
           component: Chapter,
           props: this.props
         }}
+        ref="contributeRef"
         style={styles.container}
         renderScene={(route, navigator) => (
           <Text>Contribute</Text>
