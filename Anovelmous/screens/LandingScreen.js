@@ -8,8 +8,8 @@ import React, {
 } from 'react-native';
 
 import Library from '../containers/Library';
-import TableOfContents from '../containers/TableOfContents';
-import Reader from '../containers/Reader';
+import Novel from '../containers/Novel';
+import Chapter from '../containers/Chapter';
 
 export default LandingScreen = React.createClass({
   render: function() {
@@ -20,8 +20,8 @@ export default LandingScreen = React.createClass({
               [
                 { title: 'Anovelmous', component: LandingScreen, ...this.props },
                 { title: 'Library', component: Library, ...this.props },
-                { title: 'Table Of Contents', component: TableOfContents, ...this.props },
-                { title: 'Reader', component: Reader, ...this.props }
+                { title: 'Novel', component: Novel, ...this.props },
+                { title: 'Chapter', component: Chapter, ...this.props }
               ]
             )
           )}>

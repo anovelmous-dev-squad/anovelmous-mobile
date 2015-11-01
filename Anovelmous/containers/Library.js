@@ -19,8 +19,8 @@ export default Library = React.createClass({
     return (
       <TouchableOpacity
         onPress={() => this.props.navigator.push({
-          title: 'Table Of Contents',
-          component: TableOfContents,
+          title: 'Novel',
+          component: Novel,
           props: {
             novelId: novel.id,
             ...this.props

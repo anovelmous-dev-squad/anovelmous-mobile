@@ -10,7 +10,7 @@ import React, {
 
 const tokens = [{id: '1', content: 'hey'}, {id: '2', content: 'there'}];
 
-export default Reader = React.createClass({
+export default Chapter = React.createClass({
   getInitialState: function() {
     return { tokens: tokens };
   },

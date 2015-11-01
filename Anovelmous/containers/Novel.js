@@ -10,7 +10,7 @@ import React, {
 
 const chapters = [{ id: '1', title: 'Chapter 1' }, { id: '2', title: 'Chapter 2' }];
 
-export default TableOfContents = React.createClass({
+export default Novel = React.createClass({
   getInitialState: function() {
     return { chapters: chapters };
   },
@@ -19,8 +19,8 @@ export default TableOfContents = React.createClass({
     return (
       <TouchableOpacity
         onPress={() => this.props.navigator.push({
-          title: 'Reader',
-          component: Reader,
+          title: 'Chapter',
+          component: Chapter,
           props: {
             chapterId: chapter.id,
             ...this.props
