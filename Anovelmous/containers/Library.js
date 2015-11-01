@@ -8,6 +8,8 @@ import React, {
   View,
 } from 'react-native';
 
+import Novel from './Novel';
+
 const novels = [{ id: '1', title: 'Novel 1' }, { id: '2', title: 'Novel 2' }];
 
 export default Library = React.createClass({
@@ -20,6 +22,7 @@ export default Library = React.createClass({
       <TouchableOpacity
         onPress={() => this.props.navigator.push({
           title: 'Novel',
+          navTitle: novel.title,
           component: Novel,
           props: {
             novelId: novel.id,

@@ -16,7 +16,7 @@ import React, {
 import cssVar from 'cssVar';
 import Drawer from 'react-native-drawer';
 
-import LandingScreen from './screens/LandingScreen';
+import ArchivesScreen from './screens/ArchivesScreen';
 
 const Anovelmous = React.createClass({
   getInitialState: function() {
@@ -32,7 +32,7 @@ const Anovelmous = React.createClass({
         return (
           <TouchableOpacity
             onPress={() => {}}>
-            <Text style={styles.titleText}>{route.title}</Text>
+            <Text style={styles.titleText}>{route.navTitle || route.title}</Text>
           </TouchableOpacity>
         );
       },
@@ -69,7 +69,7 @@ const Anovelmous = React.createClass({
         }
         initialRoute={{
           title: 'Anovelmous',
-          component: LandingScreen,
+          component: ArchivesScreen,
           props: {
             userId: this.state.userId
           }

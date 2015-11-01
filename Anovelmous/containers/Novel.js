@@ -8,6 +8,8 @@ import React, {
   View,
 } from 'react-native';
 
+import Chapter from './Chapter';
+
 const chapters = [{ id: '1', title: 'Chapter 1' }, { id: '2', title: 'Chapter 2' }];
 
 export default Novel = React.createClass({
@@ -20,6 +22,7 @@ export default Novel = React.createClass({
       <TouchableOpacity
         onPress={() => this.props.navigator.push({
           title: 'Chapter',
+          navTitle: chapter.title,
           component: Chapter,
           props: {
             chapterId: chapter.id,

@@ -6,11 +6,13 @@ import React, {
   View,
 } from 'react-native';
 
+import Library from '../containers/Library';
+
 export default ArchivesScreen = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <Text>Archives</Text>
+        <Library navigator={this.props.navigator}/>
       </View>
     );
   }
