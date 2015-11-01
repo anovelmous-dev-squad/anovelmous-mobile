@@ -20,6 +20,8 @@ import ContributeScreen from './screens/ContributeScreen';
 import ArchivesScreen from './screens/ArchivesScreen';
 import StatsScreen from './screens/StatsScreen';
 
+import { AppText } from './components/text';
+
 var _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
   if (_navigator.getCurrentRoutes().length === 1  ) {
@@ -29,26 +31,6 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   return true;
 });
 
-const AppText = React.createClass({
-  render: function() {
-    const { children } = this.props;
-    return <Text style={{ fontFamily: 'Roboto', color: '#FFFFFF'}}>{children}</Text>;
-  }
-});
-
-const PrimaryText = React.createClass({
-  render: function() {
-    const { children } = this.props;
-    return <Text style={{ fontFamily: 'Roboto', color: '#212121'}}>{children}</Text>;
-  }
-});
-
-const SecondaryText = React.createClass({
-  render: function() {
-    const { children } = this.props;
-    return <Text style={{ fontFamily: 'Roboto', color: '#727272'}}>{children}</Text>
-  }
-});
 
 const ControlPanel = React.createClass({
   render: function() {
