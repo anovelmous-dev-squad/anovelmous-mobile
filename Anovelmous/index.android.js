@@ -2,6 +2,7 @@
 
 import React, {
   AppRegistry,
+  BackAndroid,
   StyleSheet,
   Navigator,
   PixelRatio,
@@ -13,10 +14,19 @@ import React, {
   View,
 } from 'react-native';
 
-import cssVar from 'cssVar';
 import Drawer from 'react-native-drawer';
 
 import ArchivesScreen from './screens/ArchivesScreen';
+
+var _navigator;
+BackAndroid.addEventListener('hardwareBackPress', () => {
+  if (_navigator.getCurrentRoutes().length === 1  ) {
+     return false;
+  }
+  _navigator.pop();
+  return true;
+});
+
 
 const Anovelmous = React.createClass({
   getInitialState: function() {
@@ -80,6 +90,7 @@ const Anovelmous = React.createClass({
 });
 
 export const renderScene = (route, navigator) => {
+  _navigator = navigator;
   const Component = route.component;
   return (
     <View style={styles.scene}>
