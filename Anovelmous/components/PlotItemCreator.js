@@ -6,7 +6,7 @@ import React, {
 
 import { PrimaryText } from './text';
 
-export default PlaceCreator = React.createClass({
+export default PlotItemCreator = React.createClass({
   getInitialState: function() {
     return { name: '', description: '' };
   },
@@ -37,12 +37,12 @@ export default PlaceCreator = React.createClass({
       <View>
         <PrimaryText>Create a place!</PrimaryText>
         <TextField
-          placeholder="New York City"
+          placeholder="Abacaderon Scepter"
           value={name}
           onChangeText={this._handleNameChange}
         />
         <TextField
-          placeholder="A large American city with mass appeal"
+          placeholder="Transmogrifies foes"
           value={description}
           onChangeText={this._handleDescriptionChange}
         />
