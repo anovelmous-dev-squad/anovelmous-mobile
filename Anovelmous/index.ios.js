@@ -65,7 +65,7 @@ const Main = React.createClass({
         selectedTab: tabTitle
       });
     } else if (this.state.selectedTab === tabTitle) {
-      this.refs[tabTitle + 'Ref'].popToTop();
+      this.refs[tabTitle + 'Ref'].getNavigator().popToTop();
     }
   },
 
@@ -77,7 +77,7 @@ const Main = React.createClass({
           ref="contributeTabRef"
   	      systemIcon="favorites"
   	      onPress={() => {this.onTabPress('contribute')}}>
-          <ContributeScreen {...this.props}/>
+          <ContributeScreen {...this.props} ref="contributeRef" />
 
   	    </TabBarIOS.Item>
 
@@ -85,14 +85,14 @@ const Main = React.createClass({
   	      selected={this.state.selectedTab === 'archives'}
   	      systemIcon="bookmarks"
   	      onPress={() => {this.onTabPress('archives')}}>
-          <ArchivesScreen {...this.props} />
+          <ArchivesScreen {...this.props} ref="archivesRef" />
   	    </TabBarIOS.Item>
 
   	    <TabBarIOS.Item
   	      selected={this.state.selectedTab === 'stats'}
   	      systemIcon="most-viewed"
   	      onPress={() => {this.onTabPress('stats')}}>
-          <StatsScreen {...this.props} />
+          <StatsScreen {...this.props} ref="statsRef" />
   	    </TabBarIOS.Item>
 
   	  </TabBarIOS>
@@ -100,42 +100,34 @@ const Main = React.createClass({
   }
 });
 
-export const renderScene = (route, navigator) => {
-  const Component = route.component;
-  return (
-    <View style={styles.container}>
-      <Component
-        route={route}
-        navigator={navigator}
-        topNavigator={navigator}
-        {...route.props} />
-    </View>
-  );
-};
-
 const Anovelmous = React.createClass({
 	render: function() {
   	return (
       <Navigator
         ref={(navigator) => { this.navigator = navigator; }}
-        renderScene={renderScene}
+        renderScene={(route, navigator) => {
+          const Component = route.component;
+          return (
+            <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+              <Component
+                route={route}
+                navigator={navigator}
+                topNavigator={navigator}
+                {...route.props} />
+            </View>
+          );
+        }}
         initialRoute={{
           title: 'Anovelmous',
           component: Main,
           props: {
-            activeTab: 'contribute'
+            activeTab: 'contribute',
+            navigator: this
           }
         }}
       />
   	 );
 	}
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFD',
-  },
 });
 
 AppRegistry.registerComponent('Anovelmous', () => Anovelmous);

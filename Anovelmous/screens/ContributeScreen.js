@@ -29,6 +29,10 @@ const NavigationBarRouteMapper = {
 };
 
 export default ContributeScreen = React.createClass({
+  getNavigator: function() {
+    return this.refs.navRef;
+  },
+
   render: function() {
     return (
       <Navigator
@@ -38,7 +42,7 @@ export default ContributeScreen = React.createClass({
           component: Chapter,
           props: this.props
         }}
-        ref="contributeRef"
+        ref="navRef"
         style={styles.container}
         renderScene={(route, navigator) => (
           <Text>Contribute</Text>

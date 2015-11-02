@@ -44,6 +44,10 @@ export default ArchivesScreen = React.createClass({
     };
   },
 
+  getNavigator: function() {
+    return this.refs.navRef;
+  },
+
   render: function() {
     return (
       <Navigator
@@ -52,6 +56,7 @@ export default ArchivesScreen = React.createClass({
           component: Library,
           props: this.props
         }}
+        ref="navRef"
         renderScene={(route, navigator) => {
           const Component = route.component;
           return (
