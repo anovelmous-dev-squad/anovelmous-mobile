@@ -6,7 +6,7 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "react-native": "^0.14.0-rc",
+    "react-native": "^0.13.2",
     "react-native-drawer": "^1.6.0",
     "react-native-scrollable-tab-view": "thebritican/react-native-scrollable-tab-view"
   },
