@@ -31,7 +31,7 @@ export default PlotItemCreator = React.createClass({
     this._resetFormData();
   },
 
-  render() {
+  render: function() {
     const { name, description } = this.state;
     return (
       <View>

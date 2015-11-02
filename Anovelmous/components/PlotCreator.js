@@ -23,7 +23,7 @@ export default PlotCreator = React.createClass({
     this._resetFormData();
   },
 
-  render() {
+  render: function() {
     const { summary } = this.state;
     return (
       <View>

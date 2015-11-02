@@ -7,7 +7,8 @@
   },
   "dependencies": {
     "react-native": "^0.14.0-rc",
-    "react-native-drawer": "^1.6.0"
+    "react-native-drawer": "^1.6.0",
+    "react-native-scrollable-tab-view": "thebritican/react-native-scrollable-tab-view"
   },
   "devDependencies": {
     "eslint": "^1.7.3",

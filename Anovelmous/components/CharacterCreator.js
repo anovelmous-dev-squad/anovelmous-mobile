@@ -27,15 +27,15 @@ export default CharacterCreator = React.createClass({
     this.setState({ bio: event.target.value });
   },
 
-  _handleOnCreate = function() {
+  _handleOnCreate: function() {
     const { firstName, lastName, bio } = this.state;
     this.props.onCreate({
       firstName, lastName, bio
     });
     this._resetFormData();
-  }
+  },
 
-  render() {
+  render: function() {
     const { firstName, lastName, bio } = this.state;
     return (
       <View>
