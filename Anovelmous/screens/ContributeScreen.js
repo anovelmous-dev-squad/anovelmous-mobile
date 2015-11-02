@@ -8,7 +8,7 @@ import React, {
   View,
 } from 'react-native';
 
-import Chapter from '../containers/Chapter';
+import Contribute from '../containers/Contribute';
 
 const NavigationBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
@@ -37,16 +37,21 @@ export default ContributeScreen = React.createClass({
     return (
       <Navigator
         initialRoute={{
-          title: 'Chapter',
-          navTitle: 'Chapter 2',
-          component: Chapter,
+          title: 'Contribute',
+          navTitle: 'Live Novel',
+          component: Contribute,
           props: this.props
         }}
         ref="navRef"
         style={styles.container}
-        renderScene={(route, navigator) => (
-          <Text>Contribute</Text>
-        )}
+        renderScene={(route, navigator) => {
+          const Component = route.component;
+          return (
+            <View style={styles.container}>
+              <Component {...route.props }/>
+            </View>
+          )
+        }}
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={NavigationBarRouteMapper}

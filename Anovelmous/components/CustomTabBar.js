@@ -5,8 +5,8 @@ import React, {
   TouchableOpacity,
 } from 'react-native';
 
-import precomputeStyle from 'precomputeStyle';
-
+//import { precomputeStyle } from 'precomputeStyle';
+var precomputeStyle = require('precomputeStyle');
 const deviceWidth = require('Dimensions').get('window').width;
 const TAB_UNDERLINE_REF = 'TAB_UNDERLINE';
 
