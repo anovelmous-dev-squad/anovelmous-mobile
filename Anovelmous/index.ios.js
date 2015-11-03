@@ -54,11 +54,11 @@ const NavigationBarRouteMapper = {
 
 const Main = React.createClass({
   getInitialState: function() {
-    return { state: this.props.activeTab }
+    return { state: this.props.activeTab };
   },
 
   componentDidMount: function() {
-    this.refs.contributeTabRef.setState({hasBeenSelected: true})
+    this.refs.contributeTabRef.setState({hasBeenSelected: true});
   },
 
   onTabPress: function(tabTitle) {

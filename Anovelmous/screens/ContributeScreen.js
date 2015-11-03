@@ -8,7 +8,8 @@ import React, {
   View,
 } from 'react-native';
 
-import { MKButton, MKColor } from 'react-native-material-kit'
+import { MKButton, MKColor } from 'react-native-material-kit';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Chapter from '../containers/Chapter';
 
@@ -50,6 +51,12 @@ const getButton = () => {
   );
 };
 
+const customTextButton = (
+  <Icon.Button name="facebook" backgroundColor="#3b5998">
+    <Text style={{fontSize: 15, fontWeight: 'bold', color: 'white'}}>Login with Facebook</Text>
+  </Icon.Button>
+);
+
 export default ContributeScreen = React.createClass({
   getNavigator: function() {
     return this.refs.navRef;
@@ -69,6 +76,7 @@ export default ContributeScreen = React.createClass({
           return (
             <View style={{paddingTop: 65, flex: 1}}>
               {getButton()}
+              {customTextButton}
             </View>
           );
         }}

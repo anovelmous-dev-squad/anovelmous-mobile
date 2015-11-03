@@ -25,6 +25,7 @@
 		7BBFFA991BE82EA1003A157F /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBFFA981BE82E4D003A157F /* libRCTMaterialKit.a */; };
 		7BBFFA9D1BE8345B003A157F /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BBFFA9C1BE8345B003A157F /* MaterialIcons.ttf */; settings = {ASSET_TAGS = (); }; };
 		7BBFFAA41BE83545003A157F /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBFFAA31BE83539003A157F /* libRNVectorIcons.a */; };
+		7BBFFAA61BE83951003A157F /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BBFFAA51BE83951003A157F /* FontAwesome.ttf */; settings = {ASSET_TAGS = (); }; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,7 @@
 		7BBFFA931BE82E4D003A157F /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		7BBFFA9C1BE8345B003A157F /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		7BBFFA9E1BE83539003A157F /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		7BBFFAA51BE83951003A157F /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -328,6 +330,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				7BBFFAA51BE83951003A157F /* FontAwesome.ttf */,
 				7BBFFA9C1BE8345B003A157F /* MaterialIcons.ttf */,
 				13B07FAE1A68108700A75B9A /* Anovelmous */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -569,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BBFFA9D1BE8345B003A157F /* MaterialIcons.ttf in Resources */,
+				7BBFFAA61BE83951003A157F /* FontAwesome.ttf in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
