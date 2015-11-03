@@ -8,6 +8,8 @@ import React, {
   View,
 } from 'react-native';
 
+import { MKButton, MKColor } from 'react-native-material-kit'
+
 import Chapter from '../containers/Chapter';
 
 const NavigationBarRouteMapper = {
@@ -28,6 +30,26 @@ const NavigationBarRouteMapper = {
   },
 };
 
+const getButton = () => {
+  return (
+    <MKButton
+      backgroundColor={MKColor.Teal}
+      shadowRadius={2}
+      shadowOffset={{width:0, height:2}}
+      shadowOpacity={.7}
+      shadowColor="black"
+      onPress={() => {
+        console.log('totally a material button!');
+      }}
+      >
+      <Text pointerEvents="none"
+            style={{color: 'white', fontWeight: 'bold',}}>
+        Contribute
+      </Text>
+    </MKButton>
+  );
+};
+
 export default ContributeScreen = React.createClass({
   getNavigator: function() {
     return this.refs.navRef;
@@ -43,10 +65,13 @@ export default ContributeScreen = React.createClass({
           props: this.props
         }}
         ref="navRef"
-        style={styles.container}
-        renderScene={(route, navigator) => (
-          <Text>Contribute</Text>
-        )}
+        renderScene={(route, navigator) => {
+          return (
+            <View style={{paddingTop: 65, flex: 1}}>
+              {getButton()}
+            </View>
+          );
+        }}
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={NavigationBarRouteMapper}
@@ -58,12 +83,6 @@ export default ContributeScreen = React.createClass({
 });
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
   button: {
     backgroundColor: '#FFFFFF',
     padding: 15,

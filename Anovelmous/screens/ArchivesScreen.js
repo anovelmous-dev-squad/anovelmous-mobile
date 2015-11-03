@@ -80,7 +80,7 @@ export default ArchivesScreen = React.createClass({
 const styles = StyleSheet.create({
   scene: {
     flex: 1,
-    paddingTop: 50
+    paddingTop: 65
   },
   navBar: {
     flex: 1,
