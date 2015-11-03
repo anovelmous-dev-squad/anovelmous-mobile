@@ -12,6 +12,8 @@ import React, {
   TouchableHighlight
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import ContributeScreen from './screens/ContributeScreen';
 import ArchivesScreen from './screens/ArchivesScreen';
 import StatsScreen from './screens/StatsScreen';
@@ -72,28 +74,28 @@ const Main = React.createClass({
   render: function() {
     return (
       <TabBarIOS>
-  	    <TabBarIOS.Item
+  	    <Icon.TabBarItem
   	      selected={this.state.selectedTab === 'contribute'}
           ref="contributeTabRef"
-  	      systemIcon="favorites"
+  	      iconName="create"
   	      onPress={() => {this.onTabPress('contribute')}}>
           <ContributeScreen {...this.props} ref="contributeRef" />
 
-  	    </TabBarIOS.Item>
+  	    </Icon.TabBarItem>
 
-  	    <TabBarIOS.Item
+  	    <Icon.TabBarItem
   	      selected={this.state.selectedTab === 'archives'}
-  	      systemIcon="bookmarks"
+  	      iconName="list"
   	      onPress={() => {this.onTabPress('archives')}}>
           <ArchivesScreen {...this.props} ref="archivesRef" />
-  	    </TabBarIOS.Item>
+  	    </Icon.TabBarItem>
 
-  	    <TabBarIOS.Item
+  	    <Icon.TabBarItem
   	      selected={this.state.selectedTab === 'stats'}
-  	      systemIcon="most-viewed"
+  	      iconName="assessment"
   	      onPress={() => {this.onTabPress('stats')}}>
           <StatsScreen {...this.props} ref="statsRef" />
-  	    </TabBarIOS.Item>
+  	    </Icon.TabBarItem>
 
   	  </TabBarIOS>
     );
