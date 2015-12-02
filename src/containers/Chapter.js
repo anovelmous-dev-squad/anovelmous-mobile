@@ -25,14 +25,15 @@ class Chapter extends React.Component {
   render() {
     const { chapter, voteText } = this.props;
     return (
-      <ScrollView>
-        <Text>{chapter.text}</Text>
-        <TextInput
-          style={{height: 40}}
-          onChangeText={() => {}}
-          value={voteText}
-          />
-      </ScrollView>
+      <View>
+        <Text style={{color: 'black'}}>{chapter.text}</Text>
+        {!chapter.isCompleted &&
+          <TextInput
+            style={{height: 40}}
+            onChangeText={() => {}}
+            />
+        }
+      </View>
     );
   }
 }

@@ -1,5 +1,3 @@
-'use strict';
-
 import React, {
   ScrollView,
   StyleSheet,
@@ -10,6 +8,8 @@ import React, {
 import Relay from 'react-relay';
 
 import Chapter from './Chapter';
+
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 class Novel extends React.Component {
   static propTypes = {
@@ -24,8 +24,7 @@ class Novel extends React.Component {
   renderChapter(chapter) {
     const { vocabulary, places, characters, plotItems, voteText } = this.props;
     return (
-      <TouchableOpacity
-        onPress={() => {}}>
+      <ScrollView tabLabel={chapter.title}>
         <Chapter
           chapter={chapter}
           vocabulary={vocabulary}
@@ -34,16 +33,16 @@ class Novel extends React.Component {
           plotItems={plotItems}
           voteText={voteText}
           />
-      </TouchableOpacity>
+      </ScrollView>
     );
   }
 
   render() {
     const { novel } = this.props;
     return (
-      <ScrollView>
+      <ScrollableTabView>
         {novel.chapters.edges.map(edge => this.renderChapter(edge.node))}
-      </ScrollView>
+      </ScrollableTabView>
     );
   }
 }
@@ -62,7 +61,7 @@ export default Relay.createContainer(Novel, {
             node {
               id
               title
-              isCompleted
+              ${Chapter.getFragment('chapter')}
             }
           }
         }
