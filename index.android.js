@@ -1,53 +1,24 @@
-import React, {
-  AppRegistry,
-  Dimensions,
-  StyleSheet,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import React, { AppRegistry } from 'react-native';
+import Relay from 'react-relay';
+import ViewerQueryConfig from './src/queryConfigs/ViewerQueryConfig';
+import config from './config';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+Relay.injectNetworkLayer(
+  new Relay.DefaultNetworkLayer(config.hardwareGraphqlURL)
+);
 
-import ContributeScreen from './src/screens/ContributeScreen';
-import ArchivesScreen from './src/screens/ArchivesScreen';
-import StatsScreen from './src/screens/StatsScreen';
+import App from './src/containers/App';
 
-const deviceWidth = Dimensions.get('window').width;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 30,
-  },
-  tabView: {
-    width: deviceWidth,
-    padding: 10,
-    backgroundColor: 'rgba(0,0,0,0.01)',
-  },
-});
-
-export default class App extends React.Component {
+class Anovelmous extends React.Component {
   render() {
+    const viewerQueryConfig = new ViewerQueryConfig();
     return (
-      <View style={styles.container}>
-        <ScrollableTabView
-          tabBarPosition="bottom"
-          >
-          <ScrollView style={styles.tabView} tabLabel="Contribute">
-            <ContributeScreen />
-          </ScrollView>
-          <ScrollView style={styles.tabView} tabLabel="Archives">
-            <ArchivesScreen />
-          </ScrollView>
-          <ScrollView style={styles.tabView} tabLabel="Stats">
-            <StatsScreen />
-          </ScrollView>
-        </ScrollableTabView>
-      </View>
+      <Relay.RootContainer
+         Component={App}
+         route={viewerQueryConfig}
+      />
     );
   }
 }
 
-
-AppRegistry.registerComponent('Anovelmous', () => App);
+AppRegistry.registerComponent('Anovelmous', () => Anovelmous);

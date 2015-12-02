@@ -1,91 +1,91 @@
-'use strict';
-
 import React, {
-  ScrollView,
   StyleSheet,
+  TextInput,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import Relay from 'react-relay';
 
-import Chapter from './Chapter';
+import NovelSelect from './NovelSelect';
+import Novel from './Novel';
 
-class Novel extends React.Component {
+class Notebook extends React.Component {
   static propTypes = {
     novel: React.PropTypes.object.isRequired,
+    novels: React.PropTypes.object.isRequired,
     vocabulary: React.PropTypes.object.isRequired,
     places: React.PropTypes.object.isRequired,
     characters: React.PropTypes.object.isRequired,
     plotItems: React.PropTypes.object.isRequired,
     voteText: React.PropTypes.string.isRequired,
   }
+  constructor() {
+    super();
+    this.state = { voteText: '' };
+  }
 
-  renderChapter(chapter) {
-    const { vocabulary, places, characters, plotItems, voteText } = this.props;
+  render() {
+    const { novel, novels, vocabulary, places, characters, plotItems, voteText } = this.props;
     return (
-      <TouchableOpacity
-        onPress={() => {}}>
-        <Chapter
-          chapter={chapter}
+      <View>
+        <Text style={{color: 'black', fontSize: 20}}>notebook</Text>
+        <NovelSelect
+          currentNovel={novel}
+          novels={novels}
+          onChange={() => {}}
+          />
+        <Novel
+          novel={novel}
+          novels={novels}
           vocabulary={vocabulary}
           places={places}
           characters={characters}
           plotItems={plotItems}
           voteText={voteText}
           />
-      </TouchableOpacity>
-    );
-  }
-
-  render() {
-    const { novel } = this.props;
-    return (
-      <ScrollView>
-        {novel.chapters.edges.map(edge => this.renderChapter(edge.node))}
-      </ScrollView>
+      </View>
     );
   }
 }
 
-export default Relay.createContainer(Novel, {
+export default Relay.createContainer(Notebook, {
   fragments: {
     novel: () => Relay.QL`
       fragment on Novel {
         id
-        title
         latestChapter {
           id
         }
-        chapters(last: 4) {
-          edges {
-            node {
-              id
-              title
-              isCompleted
-            }
-          }
+        stage {
+          name
         }
+        ${NovelSelect.getFragment('currentNovel')}
+        ${Novel.getFragment('novel')}
+      }
+    `,
+    novels: () => Relay.QL`
+      fragment on NovelConnection {
+        ${NovelSelect.getFragment('novels')}
       }
     `,
     vocabulary: () => Relay.QL`
       fragment on VocabTermConnection {
-        ${Chapter.getFragment('vocabulary')}
+        ${Novel.getFragment('vocabulary')}
       }
     `,
     places: () => Relay.QL`
       fragment on PlaceConnection {
-        ${Chapter.getFragment('places')}
+        ${Novel.getFragment('places')}
       }
     `,
     characters: () => Relay.QL`
       fragment on CharacterConnection {
-        ${Chapter.getFragment('characters')}
+        ${Novel.getFragment('characters')}
       }
     `,
     plotItems: () => Relay.QL`
       fragment on PlotItemConnection {
-        ${Chapter.getFragment('plotItems')}
+        ${Novel.getFragment('plotItems')}
       }
     `,
   },

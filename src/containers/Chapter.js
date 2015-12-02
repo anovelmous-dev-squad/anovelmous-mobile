@@ -2,28 +2,93 @@ import React, {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import Relay from 'react-relay';
 
 class Chapter extends React.Component {
+  static propTypes = {
+    chapter: React.PropTypes.object.isRequired,
+    vocabulary: React.PropTypes.object.isRequired,
+    places: React.PropTypes.object.isRequired,
+    characters: React.PropTypes.object.isRequired,
+    plotItems: React.PropTypes.object.isRequired,
+    readingHeight: React.PropTypes.number,
+    onVoteChange: React.PropTypes.func,
+    onVoteCast: React.PropTypes.func,
+    voteText: React.PropTypes.string,
+    children: React.PropTypes.element,
+  }
+
   render() {
-    const { tokens } = this.props;
-    const chapterText = tokens.map(token => token.content).join(' ');
+    const { chapter, voteText } = this.props;
     return (
       <ScrollView>
-        <Text>{chapterText}</Text>
+        <Text>{chapter.text}</Text>
+        <TextInput
+          style={{height: 40}}
+          onChangeText={() => {}}
+          value={voteText}
+          />
       </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+export default Relay.createContainer(Chapter, {
+  fragments: {
+    chapter: () => Relay.QL`
+      fragment on Chapter {
+        id
+        isCompleted
+        votingDuration
+        novel {
+          prevVotingEnded
+        }
+        text
+      }
+    `,
+    vocabulary: () => Relay.QL`
+      fragment on VocabTermConnection {
+        edges {
+          node {
+            id
+            content
+          }
+        }
+      }
+    `,
+    places: () => Relay.QL`
+      fragment on PlaceConnection {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    `,
+    characters: () => Relay.QL`
+      fragment on CharacterConnection {
+        edges {
+          node {
+            id
+            firstName
+          }
+        }
+      }
+    `,
+    plotItems: () => Relay.QL`
+      fragment on PlotItemConnection {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    `,
   },
 });
