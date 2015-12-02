@@ -8,6 +8,7 @@ import React, {
 import Relay from 'react-relay';
 
 import Chapter from './Chapter';
+import ChapterTabBar from '../components/ChapterTabBar';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
@@ -40,7 +41,9 @@ class Novel extends React.Component {
   render() {
     const { novel } = this.props;
     return (
-      <ScrollableTabView>
+      <ScrollableTabView
+        renderTabBar={() => <ChapterTabBar widthOffset={45} />}
+        locked>
         {novel.chapters.edges.map(edge => this.renderChapter(edge.node))}
       </ScrollableTabView>
     );

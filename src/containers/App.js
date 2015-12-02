@@ -1,7 +1,9 @@
 import React, {
   Dimensions,
+  Navigator,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import Relay from 'react-relay';
@@ -25,7 +27,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 class App extends React.Component {
   static propTypes = {
     viewer: React.PropTypes.object.isRequired,
@@ -38,15 +39,9 @@ class App extends React.Component {
         <ScrollableTabView
           tabBarPosition="bottom"
           >
-          <ScrollView style={styles.tabView} tabLabel="Contribute">
-            <ContributeScreen contributor={viewer.contributor} viewer={viewer} />
-          </ScrollView>
-          <ScrollView style={styles.tabView} tabLabel="Archives">
-            <ArchivesScreen />
-          </ScrollView>
-          <ScrollView style={styles.tabView} tabLabel="Stats">
-            <StatsScreen />
-          </ScrollView>
+          <ContributeScreen tabLabel="Contribute" contributor={viewer.contributor} viewer={viewer} />
+          <ArchivesScreen tabLabel="Archives" />
+          <StatsScreen tabLabel="Stats" contributor={viewer.contributor} />
         </ScrollableTabView>
       </View>
     );
@@ -63,6 +58,7 @@ export default Relay.createContainer(App, {
         contributor(id: $contributorId) {
           id
           ${ContributeScreen.getFragment('contributor')}
+          ${StatsScreen.getFragment('contributor')}
         }
         ${ContributeScreen.getFragment('viewer')}
       }

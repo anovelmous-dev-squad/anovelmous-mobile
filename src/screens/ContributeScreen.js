@@ -1,9 +1,13 @@
 import React, {
+  Dimensions,
+  ScrollView,
   StyleSheet,
   TextInput,
   View,
 } from 'react-native';
 import Relay from 'react-relay';
+
+const deviceWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   base: {
@@ -20,6 +24,11 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: 2},
     shadowOpacity: 0.5,
     shadowRadius: 3,
+  },
+  tabView: {
+    width: deviceWidth,
+    padding: 10,
+    backgroundColor: 'rgba(0,0,0,0.01)',
   },
 });
 
@@ -55,6 +64,7 @@ class ContributeScreen extends React.Component {
   render() {
     const { viewer } = this.props;
     return (
+      <ScrollView style={styles.tabView}>
       <View style={styles.card}>
         <Notebook
           novel={viewer.novel}
@@ -69,6 +79,7 @@ class ContributeScreen extends React.Component {
           voteText={this.state.voteText}
           />
       </View>
+    </ScrollView>
     );
   }
 }
