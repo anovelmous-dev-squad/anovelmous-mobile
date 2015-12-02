@@ -14,10 +14,9 @@ import NovelQueryConfig from '../queryConfigs/NovelQueryConfig';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'red',
   },
   card: {
     borderWidth: 1,
@@ -54,7 +53,8 @@ class Library extends React.Component {
   render() {
     const { viewer } = this.props;
     return (
-      <View style={styles.card}>
+      <View style={styles.container}>
+        <Text>hey</Text>
         <ScrollView>
           {viewer.novels.edges.map(edge => this.renderNovelPreview(edge.node))}
         </ScrollView>

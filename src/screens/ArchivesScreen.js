@@ -14,6 +14,7 @@ export default class ArchivesScreen extends React.Component {
   render() {
     return (
       <Navigator
+        sceneStyle={{paddingTop: 65, flex: 1}}
         initialRoute={{
           title: 'Library',
           Component: Library,
