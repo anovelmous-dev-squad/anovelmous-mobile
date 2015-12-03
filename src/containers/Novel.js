@@ -1,4 +1,5 @@
 import React, {
+  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,24 +13,32 @@ import ChapterTabBar from '../components/ChapterTabBar';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+  },
   card: {
+    height: deviceHeight * (2 / 3),
     borderWidth: 1,
     backgroundColor: '#fff',
     borderColor: 'rgba(0,0,0,0.1)',
-    margin: 5,
-    height: 480,
-    padding: 15,
+    marginTop: 5,
+    padding: 10,
     shadowColor: '#ccc',
     shadowOffset: {width: 2, height: 2},
     shadowOpacity: 0.5,
     shadowRadius: 3,
-    width: 350,
   },
 });
 
 class Novel extends React.Component {
   static propTypes = {
+    width: React.PropTypes.object.isRequired,
     novel: React.PropTypes.object.isRequired,
     vocabulary: React.PropTypes.object.isRequired,
     places: React.PropTypes.object.isRequired,
@@ -41,18 +50,22 @@ class Novel extends React.Component {
   renderChapter(chapter) {
     const { vocabulary, places, characters, plotItems, voteText } = this.props;
     return (
-      <ScrollView tabLabel={chapter.title}>
-        <View style={styles.card}>
-          <Chapter
-            chapter={chapter}
-            vocabulary={vocabulary}
-            places={places}
-            characters={characters}
-            plotItems={plotItems}
-            voteText={voteText}
-            />
+      <View tabLabel={chapter.title} style={{flex: 1, justifyContent: 'space-between'}}>
+        <View style={{width: 376}}>
+          <View style={styles.container}>
+            <ScrollView style={styles.card}>
+              <Chapter
+                chapter={chapter}
+                vocabulary={vocabulary}
+                places={places}
+                characters={characters}
+                plotItems={plotItems}
+                voteText={voteText}
+                />
+            </ScrollView>
+          </View>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 

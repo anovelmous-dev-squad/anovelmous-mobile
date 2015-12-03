@@ -19,16 +19,11 @@ class Notebook extends React.Component {
     plotItems: React.PropTypes.object.isRequired,
     voteText: React.PropTypes.string.isRequired,
   }
-  constructor() {
-    super();
-    this.state = { voteText: '' };
-  }
 
   render() {
     const { novel, novels, vocabulary, places, characters, plotItems, voteText } = this.props;
     return (
       <View>
-        <Text style={{color: 'black', fontSize: 20}}>notebook</Text>
         <NovelSelect
           currentNovel={novel}
           novels={novels}

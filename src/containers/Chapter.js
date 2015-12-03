@@ -27,7 +27,7 @@ class Chapter extends React.Component {
     const { chapter, voteText } = this.props;
     return (
       <ScrollView>
-        <Text style={{color: 'black'}}>{chapter.text.slice(0, 500)}</Text>
+        <Text>{chapter.text.slice(0, 1500)}</Text>
         {!chapter.isCompleted &&
           <TextInput
             style={{height: 40}}

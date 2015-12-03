@@ -2,7 +2,6 @@ import React, {
   Dimensions,
   ScrollView,
   StyleSheet,
-  TextInput,
   View,
 } from 'react-native';
 import Relay from 'react-relay';
@@ -13,12 +12,16 @@ const styles = StyleSheet.create({
   base: {
     color: 'black',
   },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   card: {
+    width: deviceWidth - 5,
     borderWidth: 1,
     backgroundColor: '#fff',
     borderColor: 'rgba(0,0,0,0.1)',
-    margin: 5,
-    height: 620,
+    margin: 2,
     padding: 15,
     shadowColor: '#ccc',
     shadowOffset: {width: 2, height: 2},
@@ -27,7 +30,6 @@ const styles = StyleSheet.create({
   },
   tabView: {
     width: deviceWidth,
-    padding: 10,
     backgroundColor: 'rgba(0,0,0,0.01)',
   },
 });
@@ -64,22 +66,24 @@ class ContributeScreen extends React.Component {
   render() {
     const { viewer } = this.props;
     return (
-      <ScrollView style={styles.tabView}>
-      <View style={styles.card}>
-        <Notebook
-          novel={viewer.novel}
-          novels={viewer.novels}
-          vocabulary={viewer.vocabulary}
-          places={viewer.places}
-          plotItems={viewer.plotItems}
-          onNovelChange={this._handleNovelChange}
-          onChapterChange={this._handleChapterChange}
-          onVoteChange={this._handleVoteChange}
-          onVoteCast={this._handleVoteCast}
-          voteText={this.state.voteText}
-          />
+      <View style={styles.tabView}>
+        <View style={styles.container}>
+          <View style={styles.card}>
+            <Notebook
+              novel={viewer.novel}
+              novels={viewer.novels}
+              vocabulary={viewer.vocabulary}
+              places={viewer.places}
+              plotItems={viewer.plotItems}
+              onNovelChange={this._handleNovelChange}
+              onChapterChange={this._handleChapterChange}
+              onVoteChange={this._handleVoteChange}
+              onVoteCast={this._handleVoteCast}
+              voteText={this.state.voteText}
+              />
+          </View>
+        </View>
       </View>
-    </ScrollView>
     );
   }
 }
