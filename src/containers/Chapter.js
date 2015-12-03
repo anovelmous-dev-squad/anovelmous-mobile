@@ -24,14 +24,15 @@ class Chapter extends React.Component {
   }
 
   render() {
-    const { chapter, voteText } = this.props;
+    const { chapter, onVoteChange, voteText } = this.props;
     return (
       <ScrollView>
         <Text>{chapter.text.slice(0, 1500)}</Text>
         {!chapter.isCompleted &&
           <TextInput
             style={{height: 40}}
-            onChangeText={() => {}}
+            value={voteText}
+            onChangeText={(text) => onVoteChange(text)}
             />
         }
       </ScrollView>

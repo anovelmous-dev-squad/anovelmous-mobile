@@ -44,11 +44,14 @@ class Novel extends React.Component {
     places: React.PropTypes.object.isRequired,
     characters: React.PropTypes.object.isRequired,
     plotItems: React.PropTypes.object.isRequired,
+    onVoteChange: React.PropTypes.func.isRequired,
+    onVoteCast: React.PropTypes.func.isRequired,
     voteText: React.PropTypes.string.isRequired,
   }
 
   renderChapter(chapter) {
-    const { vocabulary, places, characters, plotItems, voteText } = this.props;
+    const { vocabulary, places, characters, plotItems,
+            onVoteChange, onVoteCast, voteText } = this.props;
     return (
       <View tabLabel={chapter.title} style={{flex: 1, justifyContent: 'space-between'}}>
         <View style={{width: 376}}>
@@ -60,6 +63,8 @@ class Novel extends React.Component {
                 places={places}
                 characters={characters}
                 plotItems={plotItems}
+                onVoteChange={onVoteChange}
+                onVoteCast={onVoteCast}
                 voteText={voteText}
                 />
             </ScrollView>
