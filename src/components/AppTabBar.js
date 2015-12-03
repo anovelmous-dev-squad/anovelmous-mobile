@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class ChapterTabBar extends React.Component {
+export default class AppTabBar extends React.Component {
   static propTypes: {
     goToPage: React.PropTypes.func,
     activeTab: React.PropTypes.number,
@@ -44,7 +44,7 @@ export default class ChapterTabBar extends React.Component {
     return (
       <TouchableOpacity style={[styles.tab]} key={name} onPress={() => this.props.goToPage(page)}>
         <View>
-          <Text style={{color: isTabActive ? 'navy' : 'black', fontWeight: isTabActive ? 'bold' : 'normal'}}>{name}</Text>
+          <Text style={{color: isTabActive ? '#B71C1C' : 'black', fontWeight: isTabActive ? 'bold' : 'normal'}}>{name}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -59,7 +59,7 @@ export default class ChapterTabBar extends React.Component {
       position: 'absolute',
       width: containerWidth / numberOfTabs,
       height: 4,
-      backgroundColor: 'navy',
+      backgroundColor: '#B71C1C',
       bottom: 0,
     };
 

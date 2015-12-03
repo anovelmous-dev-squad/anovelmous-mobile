@@ -12,6 +12,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import ContributeScreen from '../screens/ContributeScreen';
 import ArchivesScreen from '../screens/ArchivesScreen';
 import StatsScreen from '../screens/StatsScreen';
+import AppTabBar from '../components/AppTabBar';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -38,6 +39,7 @@ class App extends React.Component {
     return (
       <View style={[styles.container, style]}>
         <ScrollableTabView
+          renderTabBar={() => <AppTabBar />}
           tabBarPosition="bottom"
           >
           <ContributeScreen tabLabel="Contribute" contributor={viewer.contributor} viewer={viewer} />
