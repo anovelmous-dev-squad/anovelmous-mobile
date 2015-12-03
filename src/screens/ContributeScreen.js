@@ -39,6 +39,7 @@ import PrewritingView from '../containers/PrewritingView';
 
 class ContributeScreen extends React.Component {
   static propTypes = {
+    relay: React.PropTypes.object.isRequired,
     viewer: React.PropTypes.object.isRequired,
   }
 
@@ -48,7 +49,7 @@ class ContributeScreen extends React.Component {
   }
 
   _handleNovelChange = (novelId) => {
-    console.log(novelId);
+    this.props.relay.setVariables({novelId});
   }
 
   _handleChapterChange = (chapterId) => {
@@ -90,7 +91,7 @@ class ContributeScreen extends React.Component {
 
 export default Relay.createContainer(ContributeScreen, {
   initialVariables: {
-    novelId: 'Tm92ZWw6MQ==',
+    novelId: 'Tm92ZWw6Mg==',
   },
   fragments: {
     contributor: () => Relay.QL`
