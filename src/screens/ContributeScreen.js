@@ -86,7 +86,7 @@ class ContributeScreen extends React.Component {
 
 export default Relay.createContainer(ContributeScreen, {
   initialVariables: {
-    novelId: 'Tm92ZWw6Mg==',
+    novelId: 'Tm92ZWw6MQ==',
   },
   fragments: {
     contributor: () => Relay.QL`

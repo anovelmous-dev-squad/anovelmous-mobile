@@ -12,6 +12,22 @@ import ChapterTabBar from '../components/ChapterTabBar';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
+const styles = StyleSheet.create({
+  card: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: 'rgba(0,0,0,0.1)',
+    margin: 5,
+    height: 480,
+    padding: 15,
+    shadowColor: '#ccc',
+    shadowOffset: {width: 2, height: 2},
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    width: 350,
+  },
+});
+
 class Novel extends React.Component {
   static propTypes = {
     novel: React.PropTypes.object.isRequired,
@@ -26,14 +42,16 @@ class Novel extends React.Component {
     const { vocabulary, places, characters, plotItems, voteText } = this.props;
     return (
       <ScrollView tabLabel={chapter.title}>
-        <Chapter
-          chapter={chapter}
-          vocabulary={vocabulary}
-          places={places}
-          characters={characters}
-          plotItems={plotItems}
-          voteText={voteText}
-          />
+        <View style={styles.card}>
+          <Chapter
+            chapter={chapter}
+            vocabulary={vocabulary}
+            places={places}
+            characters={characters}
+            plotItems={plotItems}
+            voteText={voteText}
+            />
+        </View>
       </ScrollView>
     );
   }

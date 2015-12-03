@@ -8,6 +8,7 @@ import React, {
 } from 'react-native';
 import Relay from 'react-relay';
 
+
 class Chapter extends React.Component {
   static propTypes = {
     chapter: React.PropTypes.object.isRequired,
@@ -25,15 +26,15 @@ class Chapter extends React.Component {
   render() {
     const { chapter, voteText } = this.props;
     return (
-      <View>
-        <Text style={{color: 'black'}}>{chapter.text}</Text>
+      <ScrollView>
+        <Text style={{color: 'black'}}>{chapter.text.slice(0, 500)}</Text>
         {!chapter.isCompleted &&
           <TextInput
             style={{height: 40}}
             onChangeText={() => {}}
             />
         }
-      </View>
+      </ScrollView>
     );
   }
 }
