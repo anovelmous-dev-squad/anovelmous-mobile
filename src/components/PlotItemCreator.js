@@ -1,5 +1,5 @@
 import React, {
-  TextField,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -41,12 +41,12 @@ export default class PlotItemCreator extends React.Component {
     return (
       <View>
         <PrimaryText>Create a place!</PrimaryText>
-        <TextField
+        <TextInput
           placeholder="Abacaderon Scepter"
           value={name}
           onChangeText={this._handleNameChange}
         />
-        <TextField
+        <TextInput
           placeholder="Transmogrifies foes"
           value={description}
           onChangeText={this._handleDescriptionChange}

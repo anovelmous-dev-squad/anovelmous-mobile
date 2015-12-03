@@ -1,11 +1,13 @@
 import React, {
-  TextField,
+  Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 
 export default class PlotCreator extends React.Component {
   static propTypes = {
+    maxSummaryLength: React.PropTypes.number,
     onCreate: React.PropTypes.func,
   }
 
@@ -18,12 +20,11 @@ export default class PlotCreator extends React.Component {
     this.setState({ summary: '' });
   }
 
-  _handleSummaryChange(event) {
-    this.setState({ summary: event.target.value });
+  _handleSummaryChange(summary) {
+    this.setState({ summary });
   }
 
-  _handleOnSubmit(event) {
-    event.preventDefault();
+  _handleOnSubmit() {
     const { summary } = this.state;
     this.props.onCreate(summary);
     this._resetFormData();
@@ -32,14 +33,16 @@ export default class PlotCreator extends React.Component {
   render() {
     const { summary } = this.state;
     return (
-      <View>
-        <TextField
+      <View style={{flex: 1}}>
+        <TextInput
           placeholder="Enter a brief summary of the novel's plot"
           value={summary}
-          onChangeText={this._handleSummaryChange}
+          onChangeText={(text) => this._handleSummaryChange(text)}
           />
         <TouchableOpacity
-          onPress={this._handleOnSubmit} />
+          onPress={() => this._handleOnSubmit()}>
+          <Text>Create</Text>
+        </TouchableOpacity>
       </View>
     );
   }

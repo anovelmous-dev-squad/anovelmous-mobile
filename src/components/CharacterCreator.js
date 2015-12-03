@@ -1,5 +1,5 @@
 import React, {
-  TextField,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -45,17 +45,17 @@ export default class CharacterCreator extends React.Component {
     return (
       <View>
         <PrimaryText>Create a character!</PrimaryText>
-        <TextField
+        <TextInput
           placeholder="First Name"
           value={firstName}
           onChangeText={this._handleFirstNameChange}
         />
-        <TextField
+        <TextInput
           placeholder="Last Name"
           value={lastName}
           onChangeText={this._handleLastNameChange}
         />
-        <TextField
+        <TextInput
           placeholder="Short bio"
           value={bio}
           onChangeText={this._handleBioChange}
