@@ -6,32 +6,37 @@ import React, {
 
 import { PrimaryText } from './text';
 
-export default PlotItemCreator = React.createClass({
-  getInitialState: function() {
-    return { name: '', description: '' };
-  },
+export default class PlotItemCreator extends React.Component {
+  static propTypes = {
+    onCreate: React.PropTypes.func,
+  }
 
-  _resetFormData: function() {
+  constructor() {
+    super();
+    this.state = { name: '', description: '' };
+  }
+
+  _resetFormData() {
     this.setState({ name: '', description: '' });
-  },
+  }
 
-  _handleNameChange: function(event) {
+  _handleNameChange(event) {
     this.setState({ name: event.target.value });
-  },
+  }
 
-  _handleDescriptionChange: function(event) {
+  _handleDescriptionChange(event) {
     this.setState({ description: event.target.value });
-  },
+  }
 
-  _handleOnCreate: function() {
+  _handleOnCreate() {
     const { name, description } = this.state;
     this.props.onCreate({
-      name, description
+      name, description,
     });
     this._resetFormData();
-  },
+  }
 
-  render: function() {
+  render() {
     const { name, description } = this.state;
     return (
       <View>
@@ -54,4 +59,4 @@ export default PlotItemCreator = React.createClass({
       </View>
     );
   }
-});
+}

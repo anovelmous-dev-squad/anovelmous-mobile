@@ -1,29 +1,35 @@
 import React, {
   TextField,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
-export default PlotCreator = React.createClass({
-  getInitialState: function() {
-    return { summary: '' };
-  },
+export default class PlotCreator extends React.Component {
+  static propTypes = {
+    onCreate: React.PropTypes.func,
+  }
 
-  _resetFormData: function() {
+  constructor() {
+    super();
+    this.state = { summary: '' };
+  }
+
+  _resetFormData() {
     this.setState({ summary: '' });
-  },
+  }
 
-  _handleSummaryChange: function(event) {
+  _handleSummaryChange(event) {
     this.setState({ summary: event.target.value });
-  },
+  }
 
-  _handleOnSubmit: function(event) {
+  _handleOnSubmit(event) {
     event.preventDefault();
     const { summary } = this.state;
     this.props.onCreate(summary);
     this._resetFormData();
-  },
+  }
 
-  render: function() {
+  render() {
     const { summary } = this.state;
     return (
       <View>
@@ -37,4 +43,4 @@ export default PlotCreator = React.createClass({
       </View>
     );
   }
-});
+}

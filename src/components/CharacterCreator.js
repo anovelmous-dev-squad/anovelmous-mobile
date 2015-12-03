@@ -6,36 +6,41 @@ import React, {
 
 import { PrimaryText } from './text';
 
-export default CharacterCreator = React.createClass({
-  getInitialState: function() {
-    return { firstName: '', lastName: '', bio: '' };
-  },
+export default class CharacterCreator extends React.Component {
+  static propTypes = {
+    onCreate: React.PropTypes.func,
+  }
 
-  _resetFormData: function() {
+  constructor() {
+    super();
+    this.state = { firstName: '', lastName: '', bio: '' };
+  }
+
+  _resetFormData() {
     this.setState({ firstName: '', lastName: '', bio: '' });
-  },
+  }
 
-  _handleFirstNameChange: function(event) {
+  _handleFirstNameChange(event) {
     this.setState({ firstName: event.target.value });
-  },
+  }
 
-  _handleLastNameChange = function(event) {
+  _handleLastNameChange(event) {
     this.setState({ lastName: event.target.value });
-  },
+  }
 
-  _handleBioChange: function(event) {
+  _handleBioChange(event) {
     this.setState({ bio: event.target.value });
-  },
+  }
 
-  _handleOnCreate: function() {
+  _handleOnCreate() {
     const { firstName, lastName, bio } = this.state;
     this.props.onCreate({
-      firstName, lastName, bio
+      firstName, lastName, bio,
     });
     this._resetFormData();
-  },
+  }
 
-  render: function() {
+  render() {
     const { firstName, lastName, bio } = this.state;
     return (
       <View>
@@ -63,4 +68,4 @@ export default CharacterCreator = React.createClass({
       </View>
     );
   }
-});
+}
