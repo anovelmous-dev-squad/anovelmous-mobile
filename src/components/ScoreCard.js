@@ -1,4 +1,5 @@
 import React, {
+  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -25,25 +26,30 @@ export default class ScoreCard extends React.Component {
     score: React.PropTypes.number.isRequired,
     title: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
-    onUpvote: React.PropTypes.func.isRequired,
+    onUpvote: React.PropTypes.func,
+    onDownvote: React.PropTypes.func,
   };
 
   render() {
-    const { score, title, description } = this.props;
+    const { id, score, title, description, onUpvote, onDownvote } = this.props;
     return (
       <View style={styles.card}>
-        <View style={{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-          <TouchableOpacity>
-            <Text>'\u21E7'</Text>
-          </TouchableOpacity>
-          <Text> {score} </Text>
-          <TouchableOpacity>
-            <Text>'\u21E9'</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text style={{fontSize: 20}}>{title}</Text>
-          <Text>{description}</Text>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start'}}>
+          <View style={{width: 30}}>
+            <View style={{flex: 1, flexDirection: 'column'}}>
+                <TouchableOpacity onPress={() => onUpvote ? onUpvote(id) : {}}>
+                  <Text>{'\u21E7'}</Text>
+                </TouchableOpacity>
+                <Text> {score} </Text>
+                <TouchableOpacity onPress={() => onDownvote ? onDownvote(id) : {}}>
+                  <Text>{'\u21E9'}</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{flex: 1, flexDirection: 'column'}}>
+            <Text style={{fontSize: 20, marginBottom: 5}}>{title}</Text>
+            <Text>{description}</Text>
+          </View>
         </View>
       </View>
     );
