@@ -30,7 +30,11 @@ class Chapter extends React.Component {
         <Text>{chapter.text.slice(0, 1500)}</Text>
         {!chapter.isCompleted &&
           <TextInput
-            style={{height: 40}}
+            style={{height: 40, backgroundColor: '#fff'}}
+            maxLength={50}
+            autoCorrect={false}
+            placeholder={'\u270D'}
+            placeholderTextColor="#B71C1C"
             value={voteText}
             onChangeText={(text) => onVoteChange(text)}
             />
