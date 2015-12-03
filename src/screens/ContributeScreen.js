@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
 });
 
 import Notebook from '../containers/Notebook';
-import PrewritingView from '../containers/PrewritingView';
 
 class ContributeScreen extends React.Component {
   static propTypes = {
     relay: React.PropTypes.object.isRequired,
+    contributor: React.PropTypes.object.isRequired,
     viewer: React.PropTypes.object.isRequired,
   }
 
@@ -65,12 +65,13 @@ class ContributeScreen extends React.Component {
   }
 
   render() {
-    const { viewer } = this.props;
+    const { viewer, contributor } = this.props;
     return (
       <View style={styles.tabView}>
         <View style={styles.container}>
           <View style={styles.card}>
             <Notebook
+              contributor={contributor}
               novel={viewer.novel}
               novels={viewer.novels}
               vocabulary={viewer.vocabulary}
@@ -97,7 +98,7 @@ export default Relay.createContainer(ContributeScreen, {
     contributor: () => Relay.QL`
       fragment on Contributor {
         id
-        ${PrewritingView.getFragment('contributor')}
+        ${Notebook.getFragment('contributor')}
       }
     `,
     viewer: () => Relay.QL`
@@ -126,7 +127,6 @@ export default Relay.createContainer(ContributeScreen, {
             ${Notebook.getFragment('plotItems')}
           }
           ${Notebook.getFragment('novel')}
-          ${PrewritingView.getFragment('novel')}
         }
         novels(last: 5) {
           edges {

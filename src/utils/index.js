@@ -18,3 +18,7 @@ export const relayRenderScene = (route, navigator) => {
     />
   );
 };
+
+export const isPrewriting = (novel) => {
+  return !(novel.stage.name === 'WRITING' || novel.stage.name === 'FINISHED');
+};

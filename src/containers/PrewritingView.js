@@ -7,6 +7,11 @@ import React, {
 import Relay from 'react-relay';
 
 class PrewritingView extends React.Component {
+  static propTypes = {
+    contributor: React.PropTypes.object.isRequired,
+    novel: React.PropTypes.object.isRequired,
+  }
+
   render() {
     return (
       <View>
