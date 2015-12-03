@@ -16,6 +16,9 @@ class Anovelmous extends React.Component {
       <Relay.RootContainer
          Component={App}
          route={viewerQueryConfig}
+         renderFetched={(data) => (
+           <App style={{marginTop: 0}} {...data} />
+         )}
       />
     );
   }

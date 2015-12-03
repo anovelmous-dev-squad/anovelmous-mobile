@@ -29,13 +29,14 @@ const styles = StyleSheet.create({
 
 class App extends React.Component {
   static propTypes = {
+    style: React.PropTypes.object,
     viewer: React.PropTypes.object.isRequired,
   }
 
   render() {
-    const { viewer } = this.props;
+    const { viewer, style } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <ScrollableTabView
           tabBarPosition="bottom"
           >

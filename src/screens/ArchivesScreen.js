@@ -2,6 +2,7 @@ import React, {
   Navigator,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -15,28 +16,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFD',
   },
-  scene: {
-    paddingTop: 65,
-    flex: 1,
-  },
   navBar: {
     backgroundColor: 'white',
   },
   navBarText: {
     fontSize: 16,
-    marginVertical: 10,
     marginRight: 10,
   },
   navBarTitleText: {
     color: 'black',
     fontWeight: '500',
-    marginVertical: 9,
   },
   navBarLeftButton: {
     paddingLeft: 10,
-  },
-  navBarRightButton: {
-    paddingRight: 10,
   },
   navBarButtonText: {
     color: 'black',
@@ -73,6 +65,7 @@ export default class ArchivesScreen extends React.Component {
   render() {
     return (
       <Navigator
+        sceneStyle={{flex: 1, marginTop: 65}}
         initialRoute={{
           title: 'Library',
           Component: Library,

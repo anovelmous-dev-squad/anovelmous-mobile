@@ -14,7 +14,6 @@ import NovelQueryConfig from '../queryConfigs/NovelQueryConfig';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
   },
   card: {
     borderWidth: 1,
@@ -43,7 +42,7 @@ class Library extends React.Component {
           Component: ReadOnlyNovel,
           queryConfig: new NovelQueryConfig({novelId: novel.id}),
         })}>
-        <Text style={{color:'black', fontSize: 20}}>{novel.title}</Text>
+        <Text>{novel.title}</Text>
       </TouchableOpacity>
     );
   }
@@ -51,9 +50,9 @@ class Library extends React.Component {
   render() {
     const { viewer } = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={{color: 'black', fontSize:20}}>hey</Text>
-      </View>
+      <ScrollView style={styles.container}>
+        {viewer.novels.edges.map(edge => this.renderNovelPreview(edge.node))}
+      </ScrollView>
     );
   }
 }
