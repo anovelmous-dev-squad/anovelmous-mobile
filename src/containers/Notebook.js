@@ -17,17 +17,22 @@ class Notebook extends React.Component {
     places: React.PropTypes.object.isRequired,
     characters: React.PropTypes.object.isRequired,
     plotItems: React.PropTypes.object.isRequired,
+    onNovelChange: React.PropTypes.func.isRequired,
+    onChapterChange: React.PropTypes.func.isRequired,
+    onVoteChange: React.PropTypes.func.isRequired,
+    onVoteCast: React.PropTypes.func.isRequired,
     voteText: React.PropTypes.string.isRequired,
   }
 
   render() {
-    const { novel, novels, vocabulary, places, characters, plotItems, voteText } = this.props;
+    const { novel, novels, vocabulary, places, characters, plotItems,
+            onNovelChange, onChapterChange, onVoteChange, onVoteCast, voteText } = this.props;
     return (
       <View>
         <NovelSelect
           currentNovel={novel}
           novels={novels}
-          onChange={() => {}}
+          onChange={onNovelChange}
           >
           <Novel
             novel={novel}
@@ -36,6 +41,9 @@ class Notebook extends React.Component {
             places={places}
             characters={characters}
             plotItems={plotItems}
+            onChapterChange={onChapterChange}
+            onVoteChange={onVoteChange}
+            onVoteCast={onVoteCast}
             voteText={voteText}
             />
         </NovelSelect>

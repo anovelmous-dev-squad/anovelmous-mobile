@@ -16,6 +16,7 @@ class NovelSelect extends React.Component {
     currentNovel: React.PropTypes.object.isRequired,
     novels: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
+    children: React.PropTypes.element,
   }
 
   componentDidMount() {
@@ -28,18 +29,18 @@ class NovelSelect extends React.Component {
   }
 
   renderNovelOption(novel) {
-    return <Option>{novel.title}</Option>;
+    return <Option value={novel}>{novel.title}</Option>;
   }
 
   render() {
-    const { currentNovel, novels } = this.props;
+    const { currentNovel, novels, onChange } = this.props;
     return (
       <View style={{flex: 1}}>
         <Select
           ref="NovelSelect"
-          width={150}
           optionListRef={this._getOptionList.bind(this)}
           defaultValue={currentNovel.title}
+          onSelect={(novel) => onChange(novel.id)}
           >
           {novels.edges.map(edge => this.renderNovelOption(edge.node))}
         </Select>
