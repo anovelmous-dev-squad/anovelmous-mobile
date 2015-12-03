@@ -28,16 +28,17 @@ class Notebook extends React.Component {
           currentNovel={novel}
           novels={novels}
           onChange={() => {}}
-          />
-        <Novel
-          novel={novel}
-          novels={novels}
-          vocabulary={vocabulary}
-          places={places}
-          characters={characters}
-          plotItems={plotItems}
-          voteText={voteText}
-          />
+          >
+          <Novel
+            novel={novel}
+            novels={novels}
+            vocabulary={vocabulary}
+            places={places}
+            characters={characters}
+            plotItems={plotItems}
+            voteText={voteText}
+            />
+        </NovelSelect>
       </View>
     );
   }
