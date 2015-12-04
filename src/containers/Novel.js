@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
 
 class Novel extends React.Component {
   static propTypes = {
-    width: React.PropTypes.object.isRequired,
     novel: React.PropTypes.object.isRequired,
     vocabulary: React.PropTypes.object.isRequired,
     places: React.PropTypes.object.isRequired,

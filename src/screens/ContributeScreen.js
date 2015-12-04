@@ -64,9 +64,10 @@ class ContributeScreen extends React.Component {
               contributor={contributor}
               novel={viewer.novel}
               novels={viewer.novels}
-              vocabulary={viewer.vocabulary}
-              places={viewer.places}
-              plotItems={viewer.plotItems}
+              characters={viewer.novel.characters}
+              vocabulary={viewer.novel.vocabulary}
+              places={viewer.novel.places}
+              plotItems={viewer.novel.plotItems}
               onNovelChange={this._handleNovelChange}
               onChapterChange={this._handleChapterChange}
               onVoteChange={this._handleVoteChange}
@@ -104,7 +105,7 @@ export default Relay.createContainer(ContributeScreen, {
               totalCount
             }
           }
-          vocabulary(first: 200) {
+          vocabulary(first: 1000) {
             ${Notebook.getFragment('vocabulary')}
           }
           places(first: 50) {

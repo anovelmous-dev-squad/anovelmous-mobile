@@ -1,10 +1,14 @@
 import React, {
+  TextInput,
   View,
 } from 'react-native';
 
 export default class AutoComplete extends React.Component {
   static propTypes = {
-    dataSource: React.PropTypes.array,
+    dataSource: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object,
+    ]),
     errorStyle: React.PropTypes.object,
     errorText: React.PropTypes.string,
     filter: React.PropTypes.func,
@@ -16,7 +20,7 @@ export default class AutoComplete extends React.Component {
     menuStyle: React.PropTypes.object,
     onNewRequest: React.PropTypes.func,
     onUpdateInput: React.PropTypes.func,
-    open: React.PropTypes.object,
+    open: React.PropTypes.bool,
     searchText: React.PropTypes.string,
     showAllItems: React.PropTypes.bool,
     style: React.PropTypes.object,
@@ -69,15 +73,14 @@ export default class AutoComplete extends React.Component {
 
     const styles = {
       root: {
-        width: this.props.fullWidth ? '100%' : 256,
+        width: 256,
       },
       menu: {
         top: 40,
         left: 0,
-        width: '100%',
       },
       list: {
-        width: this.props.fullWidth ? '100%' : 256,
+        width: 256,
       },
     };
 
@@ -94,7 +97,12 @@ export default class AutoComplete extends React.Component {
     const displayFilter = showAllItems ? () => true : this.props.filter;
     let requestsList = [];
 
-    this.props.dataSource.forEach((item) => {
+    const { dataSource } = this.props;
+    const dataSourceList = typeof dataSource === 'object' ?
+      Object.keys(dataSource).map(k => dataSource[k]) :
+      dataSource;
+
+    dataSourceList.forEach((item) => {
       switch (typeof item) {
         case 'string':
           if (displayFilter(this.state.searchText, item, item)) {
@@ -153,11 +161,7 @@ export default class AutoComplete extends React.Component {
 
     return (
       <View style={rootStyles}>
-        <View
-          style={{
-            width: '100%'
-          }}
-          >
+        <View style={{flex: 1}}>
           <TextInput
             {...other}
             ref="searchTextInput"

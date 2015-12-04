@@ -8,6 +8,7 @@ import React, {
 } from 'react-native';
 import Relay from 'react-relay';
 
+import AutoComplete from '../components/AutoComplete';
 
 class Chapter extends React.Component {
   static propTypes = {
@@ -23,20 +24,52 @@ class Chapter extends React.Component {
     children: React.PropTypes.element,
   }
 
+  constructor(props) {
+    super(props);
+    const { chapter, vocabulary, places, characters, plotItems } = props;
+    const dataSource = {};
+    vocabulary.edges.forEach(edge => (
+      dataSource[edge.node.content] = this._getAutoCompleteItem(edge.node.id, edge.node.content)
+    ));
+    places.edges.forEach(edge => (
+      dataSource[edge.node.name] = this._getAutoCompleteItem(edge.node.id, edge.node.name)
+    ));
+    characters.edges.forEach(edge => (
+      dataSource[edge.node.firstName] = this._getAutoCompleteItem(edge.node.id, edge.node.firstName)
+    ));
+    plotItems.edges.forEach(edge => (
+      dataSource[edge.node.name] = this._getAutoCompleteItem(edge.node.id, edge.node.name)
+    ));
+    this.state = {
+      fullVocabulary: dataSource,
+    };
+  }
+
+  _getAutoCompleteItem(key, value) {
+    return <View><Text>{value}</Text></View>
+  }
+
+  _autoCompleteFilter(searchText, key) {
+    if (searchText.length > 2) {
+      return key.startsWith(searchText);
+    }
+    if (searchText === key) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     const { chapter, onVoteChange, voteText } = this.props;
     return (
       <ScrollView>
         <Text>{chapter.text.slice(0, 1500)}</Text>
         {!chapter.isCompleted &&
-          <TextInput
-            style={{height: 40, backgroundColor: '#fff'}}
-            maxLength={50}
-            autoCorrect={false}
-            placeholder={'\u270D'}
-            placeholderTextColor="#B71C1C"
-            value={voteText}
-            onChangeText={(text) => onVoteChange(text)}
+          <AutoComplete
+            dataSource={this.state.fullVocabulary}
+            searchText={voteText}
+            onUpdateInput={(text) => onVoteChange(text)}
+            filter={this._autoCompleteFilter}
             />
         }
       </ScrollView>
