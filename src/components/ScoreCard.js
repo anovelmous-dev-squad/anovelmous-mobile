@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3,
   },
+  upvoteText: {
+    color: '#B71C1C',
+  },
+  downvoteText: {
+    color: '#B3B3B3',
+  },
 });
 
 export default class ScoreCard extends React.Component {
@@ -37,13 +43,15 @@ export default class ScoreCard extends React.Component {
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start'}}>
           <View style={{width: 30}}>
             <View style={{flex: 1, flexDirection: 'column'}}>
-                <TouchableOpacity onPress={() => onUpvote ? onUpvote(id) : {}}>
-                  <Text>{'\u21E7'}</Text>
-                </TouchableOpacity>
-                <Text> {score} </Text>
-                <TouchableOpacity onPress={() => onDownvote ? onDownvote(id) : {}}>
-                  <Text>{'\u21E9'}</Text>
-                </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => onUpvote ? onUpvote(id) : {}}>
+                <Text style={styles.upvoteText}>⇧</Text>
+              </TouchableOpacity>
+              <Text> {score} </Text>
+              <TouchableOpacity
+                onPress={() => onDownvote ? onDownvote(id) : {}}>
+                <Text style={styles.downvoteText}>⇩</Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={{flex: 1, flexDirection: 'column'}}>
