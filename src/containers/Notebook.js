@@ -34,6 +34,7 @@ class Notebook extends React.Component {
     return (
       <View>
         <NovelSelect
+          title="📖"
           currentNovel={novel}
           novels={novels}
           onChange={onNovelChange}

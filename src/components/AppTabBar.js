@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
 
 export default class AppTabBar extends React.Component {
   static propTypes: {
+    textStyle: React.PropTypes.object,
     goToPage: React.PropTypes.func,
     activeTab: React.PropTypes.number,
     tabs: React.PropTypes.array,
@@ -40,11 +41,16 @@ export default class AppTabBar extends React.Component {
 
   renderTabOption(name, page) {
     const isTabActive = this.props.activeTab === page;
+    const { textStyle } = this.props;
 
     return (
       <TouchableOpacity style={[styles.tab]} key={name} onPress={() => this.props.goToPage(page)}>
         <View>
-          <Text style={{color: isTabActive ? '#B71C1C' : 'black', fontWeight: isTabActive ? 'bold' : 'normal'}}>{name}</Text>
+          <Text style={[{
+            color: isTabActive ? '#B71C1C' : 'black',
+            fontWeight: isTabActive ? 'bold' : 'normal',
+            fontSize: 20,
+          }, textStyle]}>{name}</Text>
         </View>
       </TouchableOpacity>
     );

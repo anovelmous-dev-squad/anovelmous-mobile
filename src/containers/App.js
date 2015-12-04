@@ -42,9 +42,9 @@ class App extends React.Component {
           renderTabBar={() => <AppTabBar />}
           tabBarPosition="bottom"
           >
-          <ContributeScreen tabLabel="Contribute" contributor={viewer.contributor} viewer={viewer} />
-          <ArchivesScreen tabLabel="Archives" />
-          <StatsScreen tabLabel="Stats" contributor={viewer.contributor} />
+          <ContributeScreen tabLabel="✍" contributor={viewer.contributor} viewer={viewer} />
+          <ArchivesScreen tabLabel="📚" />
+          <StatsScreen tabLabel="📈" contributor={viewer.contributor} />
         </ScrollableTabView>
       </View>
     );

@@ -78,7 +78,7 @@ class Novel extends React.Component {
     const { novel } = this.props;
     return (
       <ScrollableTabView
-        renderTabBar={() => <AppTabBar widthOffset={45} />}
+        renderTabBar={() => <AppTabBar widthOffset={45} textStyle={{fontSize: 15}} />}
         locked>
         {novel.chapters.edges.map(edge => this.renderChapter(edge.node))}
       </ScrollableTabView>
