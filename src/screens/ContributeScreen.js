@@ -17,20 +17,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   card: {
-    width: deviceWidth - 5,
-    borderWidth: 1,
-    backgroundColor: '#fff',
-    borderColor: 'rgba(0,0,0,0.1)',
-    margin: 2,
-    padding: 15,
-    shadowColor: '#ccc',
-    shadowOffset: {width: 2, height: 2},
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-  },
-  tabView: {
     width: deviceWidth,
-    backgroundColor: 'rgba(0,0,0,0.01)',
+    backgroundColor: '#b3b3b3',
+    borderColor: 'rgba(0,0,0,0.1)',
+    padding: 15,
   },
 });
 
@@ -67,7 +57,7 @@ class ContributeScreen extends React.Component {
   render() {
     const { viewer, contributor } = this.props;
     return (
-      <View style={styles.tabView}>
+      <View>
         <View style={styles.container}>
           <View style={styles.card}>
             <Notebook

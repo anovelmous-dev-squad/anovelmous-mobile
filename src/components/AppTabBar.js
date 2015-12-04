@@ -14,25 +14,25 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 10,
   },
 
   tabs: {
-    height: 50,
+    height: 60,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: 5,
     borderWidth: 1,
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderBottomColor: '#ccc',
+    borderBottomColor: 'white',
   },
 });
 
 export default class AppTabBar extends React.Component {
   static propTypes: {
     textStyle: React.PropTypes.object,
+    tabsStyle: React.PropTypes.object,
     goToPage: React.PropTypes.func,
     activeTab: React.PropTypes.number,
     tabs: React.PropTypes.array,
@@ -47,7 +47,7 @@ export default class AppTabBar extends React.Component {
       <TouchableOpacity style={[styles.tab]} key={name} onPress={() => this.props.goToPage(page)}>
         <View>
           <Text style={[{
-            color: isTabActive ? '#B71C1C' : 'black',
+            color: isTabActive ? 'white' : 'grey',
             fontWeight: isTabActive ? 'bold' : 'normal',
             fontSize: 20,
           }, textStyle]}>{name}</Text>
@@ -57,7 +57,7 @@ export default class AppTabBar extends React.Component {
   }
 
   render() {
-    const { tabs, widthOffset } = this.props;
+    const { tabs, widthOffset, tabsStyle } = this.props;
     const numberOfTabs = tabs.length;
 
     const containerWidth = widthOffset ? deviceWidth - widthOffset : deviceWidth;
@@ -65,7 +65,7 @@ export default class AppTabBar extends React.Component {
       position: 'absolute',
       width: containerWidth / numberOfTabs,
       height: 4,
-      backgroundColor: '#B71C1C',
+      backgroundColor: 'white',
       bottom: 0,
     };
 
@@ -74,7 +74,7 @@ export default class AppTabBar extends React.Component {
     });
 
     return (
-      <View style={styles.tabs}>
+      <View style={[styles.tabs, tabsStyle]}>
         {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
         <Animated.View style={[tabUnderlineStyle, {left}]} />
       </View>

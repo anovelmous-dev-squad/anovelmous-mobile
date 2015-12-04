@@ -1,9 +1,5 @@
 import React, {
-  Dimensions,
-  Navigator,
-  ScrollView,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import Relay from 'react-relay';
@@ -14,32 +10,27 @@ import ArchivesScreen from '../screens/ArchivesScreen';
 import StatsScreen from '../screens/StatsScreen';
 import AppTabBar from '../components/AppTabBar';
 
-const deviceWidth = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 30,
-  },
-  tabView: {
-    width: deviceWidth,
-    padding: 10,
-    backgroundColor: 'rgba(0,0,0,0.01)',
+    backgroundColor: '#B71C1C',
   },
 });
 
 class App extends React.Component {
   static propTypes = {
     style: React.PropTypes.object,
+    tabBar: React.PropTypes.element,
     viewer: React.PropTypes.object.isRequired,
   }
 
   render() {
-    const { viewer, style } = this.props;
+    const { viewer, style, tabBar } = this.props;
     return (
       <View style={[styles.container, style]}>
         <ScrollableTabView
-          renderTabBar={() => <AppTabBar />}
+          renderTabBar={tabBar || () => <AppTabBar textStyle={{color: 'white'}}/>}
           tabBarPosition="bottom"
           >
           <ContributeScreen tabLabel="✍" contributor={viewer.contributor} viewer={viewer} />

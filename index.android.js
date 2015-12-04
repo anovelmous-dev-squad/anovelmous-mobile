@@ -8,6 +8,7 @@ Relay.injectNetworkLayer(
 );
 
 import App from './src/containers/App';
+import AppTabBar from './src/components/AppTabBar';
 
 class Anovelmous extends React.Component {
   render() {
@@ -17,7 +18,11 @@ class Anovelmous extends React.Component {
          Component={App}
          route={viewerQueryConfig}
          renderFetched={(data) => (
-           <App style={{marginTop: 0}} {...data} />
+           <App
+             style={{marginTop: 0}}
+             tabBar={() => <AppTabBar textStyle={{color: 'white'}} tabsStyle={{height: 40}} />}
+             {...data}
+             />
          )}
       />
     );
