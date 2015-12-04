@@ -1,6 +1,7 @@
 import React, {
   Dimensions,
   View,
+  StyleSheet,
   Text,
 } from 'react-native';
 import Relay from 'react-relay';
@@ -14,6 +15,24 @@ import {
 
 const deviceWidth = Dimensions.get('window').width;
 
+const styles = StyleSheet.create({
+  selectionContainer: {
+    width: deviceWidth * (2 / 3),
+  },
+  selectionRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  select: {
+    borderColor: 'white',
+    borderBottomWidth: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderTopWidth: 0,
+  },
+});
 
 class NovelSelect extends React.Component {
   static propTypes = {
@@ -41,11 +60,11 @@ class NovelSelect extends React.Component {
     const { title, currentNovel, novels, onChange } = this.props;
     return (
       <View>
-        <View style={{ width: deviceWidth * (2 / 3) }}>
-          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+        <View style={styles.selectionContainer}>
+          <View style={styles.selectionRow}>
             {title && <Text style={{fontSize: 20}}>{title}</Text>}
             <Select
-              style={{borderBottomWidth: 1, borderLeftWidth: 0, borderRightWidth: 0, borderTopWidth: 0}}
+              style={styles.select}
               ref="NovelSelect"
               optionListRef={this._getOptionList.bind(this)}
               defaultValue={currentNovel.title}
