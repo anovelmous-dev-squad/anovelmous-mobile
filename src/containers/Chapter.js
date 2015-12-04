@@ -46,11 +46,11 @@ class Chapter extends React.Component {
   }
 
   _getAutoCompleteItem(key, value) {
-    return <View><Text>{value}</Text></View>
+    return { text: value, value: <Text>{value}</Text> };
   }
 
   _autoCompleteFilter(searchText, key) {
-    if (searchText.length > 2) {
+    if (searchText.length > 1) {
       return key.startsWith(searchText);
     }
     if (searchText === key) {
@@ -66,6 +66,7 @@ class Chapter extends React.Component {
         <Text>{chapter.text.slice(0, 1500)}</Text>
         {!chapter.isCompleted &&
           <AutoComplete
+            open
             dataSource={this.state.fullVocabulary}
             searchText={voteText}
             onUpdateInput={(text) => onVoteChange(text)}

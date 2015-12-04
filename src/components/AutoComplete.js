@@ -74,7 +74,7 @@ export default class AutoComplete extends React.Component {
 
     const styles = {
       root: {
-        height: 40,
+        height: 200,
         width: 256,
       },
       menu: {
@@ -164,7 +164,7 @@ export default class AutoComplete extends React.Component {
           <TextInput
             {...other}
             ref="searchTextInput"
-            style={{height: 40, color: 'black'}}
+            style={{height: 40}}
             value={this.state.searchText}
             onSubmitEditing={() => this.setState({open: false})}
             onChangeText={(text) => this._updateRequests(text)}
@@ -181,6 +181,7 @@ export default class AutoComplete extends React.Component {
             {...textInputProps}
             />
         </View>
+        {menu}
       </View>
     );
   }
