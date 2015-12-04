@@ -64,7 +64,7 @@ export default class AppTabBar extends React.Component {
     const tabUnderlineStyle = {
       position: 'absolute',
       width: containerWidth / numberOfTabs,
-      height: 4,
+      height: 3,
       backgroundColor: 'white',
       bottom: 0,
     };
