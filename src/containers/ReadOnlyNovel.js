@@ -1,4 +1,5 @@
 import React, {
+  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
@@ -7,6 +8,11 @@ import React, {
 } from 'react-native';
 import Relay from 'react-relay';
 
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import AppTabBar from '../components/AppTabBar';
+
+const deviceWidth = Dimensions.get('window').width;
+
 class ReadOnlyNovel extends React.Component {
   static propTypes = {
     novel: React.PropTypes.object.isRequired,
@@ -14,20 +20,20 @@ class ReadOnlyNovel extends React.Component {
 
   renderChapter(chapter) {
     return (
-      <TouchableOpacity
-        onPress={() => {}}>
-        <Text>chapter</Text>
-      </TouchableOpacity>
+      <ScrollView
+        style={{width: deviceWidth}}
+        tabLabel={chapter.title}>
+        <Text>{chapter.text}</Text>
+      </ScrollView>
     );
   }
 
   render() {
-    //{novel.chapters.edges.map(edge => this.renderChapter(edge.node))}
     const { novel } = this.props;
     return (
-      <ScrollView>
-        {novel.latestChapter.text}
-      </ScrollView>
+      <ScrollableTabView renderTabBar={() => <AppTabBar />}>
+        {novel.chapters.edges.map(edge => this.renderChapter(edge.node))}
+      </ScrollableTabView>
     );
   }
 }
@@ -38,16 +44,13 @@ export default Relay.createContainer(ReadOnlyNovel, {
       fragment on Novel {
         id
         title
-        latestChapter {
-          id
-          text
-        }
-        chapters(last: 4) {
+        chapters(first: 4) {
           edges {
             node {
               id
               title
               isCompleted
+              text
             }
           }
         }
